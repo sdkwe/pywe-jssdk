@@ -12,18 +12,22 @@ from pywe_ticket import ticket
 __all__ = ['jsapi_signature_params']
 
 
-def jsapi_signature_params(appid=None, secret=None, url=None, storage=None):
-    nonceStr, timestamp = shortuuid.uuid(), int(time.time())
+def jsapi_signature_params(appid=None, secret=None, url=None, storage=None, full=False):
+    nonceStr, timestamp, tk, url = shortuuid.uuid(), int(time.time()), ticket(appid, secret, storage=storage), url.split('#')[0]
     data = {
         'noncestr': nonceStr,
-        'jsapi_ticket': ticket(appid, secret, storage=storage),
+        'jsapi_ticket': tk,
         'timestamp': timestamp,
-        'url': ''.join(url.split('#')[:-1])
+        'url': url
     }
     signature = jsapi_signature(data)
-    return {
+    params = {
         'appId': appid,
         'nonceStr': nonceStr,
         'timestamp': timestamp,
         'signature': signature,
     }
+    if full:
+        params['ticket'] = tk
+        params['url'] = url
+    return params

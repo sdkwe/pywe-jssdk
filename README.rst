@@ -25,5 +25,5 @@ Method
 
 ::
 
-    def jsapi_signature_params(appid=None, secret=None, url=None, token=None, storage=None, full=False):
+    def jsapi_signature_params(appid=None, secret=None, url=None, token=None, storage=None, token_fetched_func=None, full=False):
 

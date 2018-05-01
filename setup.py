@@ -20,7 +20,7 @@ setup(
 
     packages=['pywe_jssdk'],
     py_modules=[],
-    install_requires=['pywe_sign', 'pywe_ticket', 'shortuuid'],
+    install_requires=['pywe_sign', 'pywe_ticket>=1.1.0', 'shortuuid'],
 
     classifiers=[
         "License :: OSI Approved :: BSD License",
